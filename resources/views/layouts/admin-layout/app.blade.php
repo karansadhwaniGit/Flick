@@ -34,14 +34,17 @@
             </div>
         </nav>
         <div class="container" style="padding:0!important">
-            <div class="row" style="overflow-x:hidden">
-                <div class="col-sm-4 my-3">
+            <div class="row my-3" style="overflow-x:hidden">
+                <div class="col-sm-4">
                     <div class="p-2 border border-light">
                         <ul class="nav flex-column text-light">
                             <li><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
                             <li><a class="nav-link" href="{{route('categories.index')}}">Categories</a></li>
                         </ul>
                     </div>
+                </div>
+                <div class="col-sm-8">
+                    @yield('content')
                 </div>
             </div>
         </div>
