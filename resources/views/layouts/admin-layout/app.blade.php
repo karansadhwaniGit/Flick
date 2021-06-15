@@ -38,7 +38,8 @@
                 <div class="col-sm-4 my-3">
                     <div class="p-2 border border-light">
                         <ul class="nav flex-column text-light">
-                            @yield('content')
+                            <li><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
+                            <li><a class="nav-link" href="{{route('categories.index')}}">Categories</a></li>
                         </ul>
                     </div>
                 </div>
