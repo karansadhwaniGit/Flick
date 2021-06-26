@@ -40,6 +40,7 @@
                         <ul class="nav flex-column text-light">
                             <li><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
                             <li><a class="nav-link" href="{{route('categories.index')}}">Categories</a></li>
+                            <li><a class="nav-link" href="{{route('tags.index')}}">Tags</a></li>
                         </ul>
                     </div>
                 </div>
