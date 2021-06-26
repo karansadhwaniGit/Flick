@@ -10,14 +10,14 @@
 <body class="bg-dark">
         <nav class="navbar navbar-expand navbar-light bg-light">
         <!-- Navbar content -->
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Flicks</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('dashboard')}}">Admin Panel <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <form action="{{route('logout')}}" class="form-inline my-2 my-lg-0 mx-3" method="POST">
