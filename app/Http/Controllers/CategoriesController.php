@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\categories;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        $categories=categories::paginate(1);
+        $categories=categories::paginate(5);
         return view('categories.index',compact('categories'));
     }
 
@@ -42,6 +43,7 @@ class CategoriesController extends Controller
         categories::create([
             'name'=>$request->name
         ]);
+        session()->flash('success','Category Created Successfully!');
         return redirect(route('categories.index'));
     }
 
@@ -62,9 +64,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(categories $category)//route model binding
     {
-        //
+        return view('categories.edit',compact(['category']));
     }
 
     /**
@@ -74,9 +76,14 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, categories $category)
     {
-        //
+        $category->name = $request->name;
+        //$category->update(['name'=>$request->name]);
+        $category->save();
+
+        session()->flash('success','Category Updated Successfully!');
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -85,8 +92,10 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(categories $category)
     {
-        //
+        $category->delete();
+        session()->flash('success','Category deleted Successfully!');
+        return redirect(route('categories.index'));
     }
 }

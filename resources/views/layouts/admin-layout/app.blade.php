@@ -40,10 +40,12 @@
                         <ul class="nav flex-column text-light">
                             <li><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
                             <li><a class="nav-link" href="{{route('categories.index')}}">Categories</a></li>
+                            <li><a class="nav-link" href="{{route('categories.index')}}">Tags</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-8">
+                    @include('layouts.partials._message')
                     @yield('content')
                 </div>
             </div>
@@ -51,5 +53,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="{{asset('admin-panel/js/bootstrap.min.js')}}"></script>
+    @yield('page-level-scripts')
 </body>
 </html>
