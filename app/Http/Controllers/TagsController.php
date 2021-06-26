@@ -23,9 +23,11 @@ class TagsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        Tag::create([
+            'name'=>$request->name
+        ]);
     }
 
     /**

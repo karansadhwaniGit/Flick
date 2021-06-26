@@ -10,16 +10,14 @@
                 <thead>
                   <tr class="text-center bg-black">
                     <th scope="col">Tags</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody class="text-center">
                 @foreach($tags as $tag)
                     <tr>
                         <td>{{$tag->name}}</td>
-                        <td><a href="" class="btn btn-success">Edit</a></td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                        <td><a href="" class="btn btn-success">Edit</a><a href="" class="btn btn-danger">Delete</a></td>
                     </tr>
                 @endforeach
                 </tbody>
