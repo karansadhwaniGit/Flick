@@ -33,25 +33,25 @@
     {{-- DELETE MODAL --}}
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete Category!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="" method="POST" id="deleteCategoryForm">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    Do You Want to Delete Category ?
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header" style="border:none">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Tag!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color:white">&times;</span>
+                  </button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-danger">Delete</button>
-                </div>
-            </form>
-          </div>
+                <form action="" method="POST" id="deleteCategoryForm">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body border border-secondary">
+                        Do You Want to Delete Category ?
+                    </div>
+                    <div class="modal-footer" style="border:none">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </div>
+                </form>
+              </div>
         </div>
       </div>
     <div class="bg-dark my-2">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTagRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -23,11 +25,9 @@ class TagsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        Tag::create([
-            'name'=>$request->name
-        ]);
+        return view('tags.create');
     }
 
     /**
@@ -36,9 +36,13 @@ class TagsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTagRequest $request)
     {
-        //
+        Tag::create([
+            'name'=>$request->name
+        ]);
+        session()->flash('success',"Tags added Succesfully!");
+        return redirect(route('tags.index'));
     }
 
     /**
@@ -49,7 +53,6 @@ class TagsController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
     }
 
     /**
@@ -60,7 +63,7 @@ class TagsController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit',compact('tag'));
     }
 
     /**
@@ -70,9 +73,12 @@ class TagsController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $tag->name=$request->name;
+        $tag->save();
+        session('success','Tag Edited Succefully!!');
+        return redirect(route('tags.index'));
     }
 
     /**
@@ -83,6 +89,8 @@ class TagsController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        session()->flash('success',"Tag Edited Successfully!");
+        return redirect(route('tags.index'));
     }
 }
