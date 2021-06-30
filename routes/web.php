@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[\App\Http\Controllers\FrontendController::class,'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,3 +27,4 @@ require __DIR__.'/auth.php';
 //
 Route::resource('categories', CategoriesController::class);
 Route::resource('tags',TagsController::class);
+Route::resource('posts', PostsController::class);
