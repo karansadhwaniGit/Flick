@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,4 @@ require __DIR__.'/auth.php';
 //
 Route::resource('categories', CategoriesController::class);
 Route::resource('tags',TagsController::class);
+Route::resource('posts', PostsController::class);
