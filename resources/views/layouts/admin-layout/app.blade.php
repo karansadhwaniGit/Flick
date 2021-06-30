@@ -39,6 +39,7 @@
                     <div class="p-2 border border-light">
                         <ul class="nav flex-column text-light">
                             <li><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
+                            <li><a class="nav-link" href="{{route('posts.index')}}">Posts</a></li>
                             <li><a class="nav-link" href="{{route('categories.index')}}">Categories</a></li>
                             <li><a class="nav-link" href="{{route('tags.index')}}">Tags</a></li>
                         </ul>
