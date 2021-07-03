@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('admin-panel/css/bootstrap.min.css')}}">
+    @yield('page-level-styles')
     <title>Document</title>
 </head>
 <body class="bg-dark">

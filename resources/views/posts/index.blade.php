@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout.app')
 @section('content')
     <div class="d-flex justify-content-end text-light">
-        <a href="{{ route('posts.create')}}" class="btn btn-outline-primary m-3">Add Post</a>
+        <a href="{{ route('posts.create')}}" class="btn btn-outline-primary m-3">Add Posts</a>
     </div>
     <div class="card bg-dark text-light ">
         <div class="card-header border border-bottom border-light"><h2>Posts</h2></div>
@@ -9,21 +9,18 @@
             <table class="table table-hover table-dark m-0">
                 <thead>
                   <tr class="text-center bg-black">
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Excerpt</th>
-                    <th>Category</th>
-                    <th>Action</th>
-
+                    <th scope="col">Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Excerpt</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody class="text-center">
                 @foreach($posts as $post)
                     <tr>
-                        <td><img src="{{asset($post->image_path)}}" alt="" width="120"></td>
-                        <td>{{ $post->title }}</td>
-                        <td>{{ $post->excerpt }}</td>
-                        <td>{{ $post->category->name }}</td>
+                        <td><img src="{{asset("$post->image_path")}}" alt="" width="80"></td>
+                        <td>{{$post->title}}</td>
+                        <td>{{$post->excerpt}}</td>
                         <td>
                             <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
                             <button type="button" class="btn btn-danger" onclick="displayModal({{ $post->id}})" data-toggle="modal" data-target="#deleteModal">
@@ -47,7 +44,7 @@
                     <span aria-hidden="true" style="color:white">&times;</span>
                   </button>
                 </div>
-                <form action="" method="POST" id="deletePostForm">
+                <form action="" method="POST" id="deleteCategoryForm">
                     @csrf
                     @method('DELETE')
                     <div class="modal-body border border-secondary">
@@ -68,9 +65,9 @@
 
 @section('page-level-scripts')
     <script>
-        function displayModal(postId){
-            var url = "/categories/"+ postId;
-            $("#deletePostForm").attr('action',url);
+        function displayModal(categoryId){
+            var url = "/categories/"+ categoryId;
+            $("#deleteCategoryForm").attr('action',url);
         }
 </script>
 @endsection

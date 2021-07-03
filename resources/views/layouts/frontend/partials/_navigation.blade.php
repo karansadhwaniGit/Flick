@@ -76,6 +76,7 @@
         <div class="navbar-collapse collapse navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <li>
+                    <a href="{{route('')}}" data-toggle="dropdown" class="dropdown-toggle color-light">Home </a>
                     <a href="index.html" data-toggle="dropdown" class="dropdown-toggle color-light">Home </a>
                 </li>
             </ul>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePostRequest;
 use App\Models\categories;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -18,7 +19,6 @@ class PostsController extends Controller
     public function index()
     {
         $posts= Post::paginate(3);
-        // dd($posts);
         return view('posts.index',compact('posts'));
     }
 
@@ -42,7 +42,7 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $image = $request->file('image')->stroe('images/posts');
+        $image = $request->file('image')->store('images/posts');
         $post = Post::create([
             'title'=>$request->title,
             'excerpt'=>$request->excerpt,
@@ -75,9 +75,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories=categories::all();
+        $tags=Tag::all();
+        return view('posts.edit',compact(['post','tags','categories']));
+
     }
 
     /**
@@ -87,9 +90,18 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request,Post $post)
     {
-        //
+        $data=$request->only(['title','excerpt','published_at','content','category_id']);
+        if($request->hasFile('image')){
+            $image=$request->image->store('images/posts');
+            $data['image']=$image;
+            $post->deleteImage();
+        }
+        $post->update($data);
+        $post->tags()->sync($request->tags);
+        session()->flash('success',"Post Update Successfully!");
+        return redirect(route('posts.index'));
     }
 
     /**
