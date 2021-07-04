@@ -19,7 +19,11 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->excerpt}}</td>
                         <td>
-                            <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+                            <form action="{{route('posts.restore',$post->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-primary">Restore</button>
+                            </form>
                             <button type="button" class="btn btn-danger" onclick="displayModal({{ $post->id}})" data-toggle="modal" data-target="#deleteModal">
                                 Delete
                             </button>
@@ -62,8 +66,8 @@
 
 @section('page-level-scripts')
     <script>
-        function displayModal(categoryId){
-            var url = "/categories/"+ categoryId;
+        function displayModal(postId){
+            var url = "/posts/"+ postId;
             $("#deleteCategoryForm").attr('action',url);
         }
 </script>

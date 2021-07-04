@@ -23,9 +23,10 @@ Route::get('/',[FrontendController::class,'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-Route::delete('/posts/trash/{post}',[PostsController::class,'trash'])->name('post.trash');
-Route::get('/posts/trash',[PostsController::class,'trashed'])->name('posts.trashed');
-
+Route::delete('/posts/trash/{post}',[PostsController::class,'trash'])->name('posts.trash');
+Route::get('/posts/trashed',[PostsController::class,'trashed'])->name('posts.trashed');
+Route::put('/posts/restore/{post}',[PostsController::class,'restore'])->name('posts.restore');
+Route::delete('posts/{id}',[PostsController::class,'destroy'])->name('post.delete');
 require __DIR__.'/auth.php';
 //
 Route::resource('categories', CategoriesController::class);

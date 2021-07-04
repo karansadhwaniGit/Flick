@@ -65,8 +65,8 @@
 
 @section('page-level-scripts')
     <script>
-        function displayModal(categoryId){
-            var url = "/categories/"+ categoryId;
+        function displayModal(postId){
+            var url = "/posts/trash/"+ postId;
             $("#deleteCategoryForm").attr('action',url);
         }
 </script>

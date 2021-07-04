@@ -110,19 +110,30 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id)//this will not show if we (error dega) if we use route model binding
     {
-        //
+        $post=Post::withTrashed()->findOrFail($id);
+        $post->deleteImage();
+        $post->forceDelete();
+        session()->flash('success','Post Deleted Successfully!');
+        return redirect(route('posts.trash'));
     }
     public function trashed()
     {
-        // dd(Post::onlyTrashed());
-        $posts=Post::withTrashed();
+        $posts=Post::onlyTrashed()->paginate(10);
         return view('posts.trash',compact(['posts']));
     }
     public function trash(Post $post)
     {
         $post->delete();
-        return view(route('posts.index'));
+        session()->flash('success',"Post Trashed Successfully");
+        return redirect(route('posts.index'));
+    }
+    public function restore($id)//this will not show if we (error dega) if we use route model binding
+    {
+        $trashed=Post::onlyTrashed()->findOrFail($id);
+        $trashed->restore();
+        session()->flash("success","Post Restored Successfully!");
+        return redirect(route('posts.index'));
     }
 }
