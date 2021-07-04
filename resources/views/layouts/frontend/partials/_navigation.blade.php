@@ -75,9 +75,13 @@
 
         <div class="navbar-collapse collapse navbar-main-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="index.html" data-toggle="dropdown" class="dropdown-toggle color-light">Home </a>
-                </li>
+                    @if(auth()->check())
+                        <li><a href="{{route('dashboard')}}" class="py30 color-light">Dashboard</a></li>
+                        <li><a class="color-light"><strong>Welcome {{auth()->user()->name}}</strong></a></li>
+                        <li><a href="">Sign Out</a></li>
+                    @else
+                       <li><a href="index.html" data-toggle="dropdown" class="dropdown-toggle color-light">Dashboard</a></li>
+                    @endif
             </ul>
 
         </div>

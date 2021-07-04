@@ -1,4 +1,4 @@
-<div id="sidebar" class="col-md-3 mt50 animated" data-animation="fadeInRight" data-animation-delay="250">
+<div id="sidebar" class="col-md-3 mt80 animated" data-animation="fadeInRight" data-animation-delay="250">
 
 
     <!-- Search

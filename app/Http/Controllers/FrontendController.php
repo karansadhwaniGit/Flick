@@ -16,4 +16,10 @@ class FrontendController extends Controller
         $categories = Category::all();
         return view('blogs.index',compact(['posts','tags','categories']));
     }
+    function show(Post $post)
+    {
+        $categories=Category::all();
+        $tags=Tag::all();
+        return view('blogs.post',compact(['post','categories','tags']));
+    }
 }
