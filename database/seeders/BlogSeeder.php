@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\categories;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Carbon\Carbon;
@@ -19,10 +19,10 @@ class BlogSeeder extends Seeder
      */
     public function run()
     {
-        $categoryNews= categories::create(['name'=>'News']);
-        $categoryTech= categories::create(['name'=>'Tech']);
-        $categoryEngineering=categories::create(['name'=>'Engineering']);
-        $categoryDesign=categories::create(['name'=>'Design']);
+        $categoryNews= Category::create(['name'=>'News']);
+        $categoryTech= Category::create(['name'=>'Tech']);
+        $categoryEngineering=Category::create(['name'=>'Engineering']);
+        $categoryDesign=Category::create(['name'=>'Design']);
 
         $tagCustomers= Tag::create(['name'=>'customers']);
         $tagLaravel= Tag::create(['name'=>'laravel']);
@@ -33,7 +33,7 @@ class BlogSeeder extends Seeder
             'title'=>'30 Days of Code!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'posts/images/1.jpg',
+            'image'=>'images/posts/1.jpg',
             'category_id'=>$categoryDesign->id,
             'user_id'=>1,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -43,7 +43,7 @@ class BlogSeeder extends Seeder
             'title'=>'Core Java!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'posts/images/2.jpg',
+            'image'=>'images/posts/2.jpg',
             'category_id'=>$categoryEngineering->id,
             'user_id'=>1,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -53,7 +53,7 @@ class BlogSeeder extends Seeder
             'title'=>'Changes in Java!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'posts/images/3.jpg',
+            'image'=>'images/posts/3.jpg',
             'category_id'=>$categoryNews->id,
             'user_id'=>2,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -63,7 +63,7 @@ class BlogSeeder extends Seeder
             'title'=>'Technologies To learn!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'posts/images/1.jpg',
+            'image'=>'images/posts/1.jpg',
             'category_id'=>$categoryTech->id,
             'user_id'=>2,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -73,7 +73,7 @@ class BlogSeeder extends Seeder
             'title'=>'Technologies To learn!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'posts/images/5.jpg',
+            'image'=>'images/posts/5.jpg',
             'category_id'=>$categoryTech->id,
             'user_id'=>1,
             'published_at'=>Carbon::now()->format('Y-m-d')

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::get('/',[FrontendController::class,'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::delete('/posts/trash/{post}',[PostsController::class,'trash'])->name('post.trash');
+Route::get('/posts/trash',[PostsController::class,'trashed'])->name('posts.trashed');
 
 require __DIR__.'/auth.php';
 //

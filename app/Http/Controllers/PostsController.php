@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\categories;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Http\Requests\CreatePostRequest;
@@ -29,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $categories= categories::all();
+        $categories= Category::all();
         $tags= Tag::all();
         return view('posts.create',compact(['categories','tags']));
     }
@@ -77,7 +77,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories=categories::all();
+        $categories=Category::all();
         $tags=Tag::all();
         return view('posts.edit',compact(['post','tags','categories']));
 
@@ -113,5 +113,16 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function trashed()
+    {
+        // dd(Post::onlyTrashed());
+        $posts=Post::withTrashed();
+        return view('posts.trash',compact(['posts']));
+    }
+    public function trash(Post $post)
+    {
+        $post->delete();
+        return view(route('posts.index'));
     }
 }

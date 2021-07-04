@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\categories;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        $categories=categories::paginate(5);
+        $categories=Category::paginate(5);
         return view('categories.index',compact('categories'));
     }
 
@@ -40,7 +40,7 @@ class CategoriesController extends Controller
      */
     public function store(CreateCategoryRequest $request)
     {
-        categories::create([
+        Category::create([
             'name'=>$request->name
         ]);
         session()->flash('success','Category Created Successfully!');
@@ -64,7 +64,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(categories $category)//route model binding
+    public function edit(Category $category)//route model binding
     {
         return view('categories.edit',compact(['category']));
     }
@@ -76,7 +76,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, categories $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->name = $request->name;
         //$category->update(['name'=>$request->name]);
@@ -92,9 +92,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categories $category)
+    public function destroy(Category $category)
     {
-        if($category->posts->count()>0){
+        if($category->posts()->count()>0){
             session()->flash('error',"This Category Cannot be deleted!");
             return redirect(route('tags.index'));
         }
