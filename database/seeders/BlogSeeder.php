@@ -43,7 +43,7 @@ class BlogSeeder extends Seeder
             'title'=>'Core Java!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'images/posts/2.jpg',
+            'image'=>'images/posts/6.jpg',
             'category_id'=>$categoryEngineering->id,
             'user_id'=>1,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -53,7 +53,7 @@ class BlogSeeder extends Seeder
             'title'=>'Changes in Java!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'images/posts/3.jpg',
+            'image'=>'images/posts/7.jpg',
             'category_id'=>$categoryNews->id,
             'user_id'=>2,
             'published_at'=>Carbon::now()->format('Y-m-d')
@@ -63,17 +63,17 @@ class BlogSeeder extends Seeder
             'title'=>'Technologies To learn!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'images/posts/1.jpg',
+            'image'=>'images/posts/8.jpg',
             'category_id'=>$categoryTech->id,
             'user_id'=>2,
             'published_at'=>Carbon::now()->format('Y-m-d')
         ]);
 
         $post5=Post::create([
-            'title'=>'Technologies To learn!',
+            'title'=>'Technologies To learnt!',
             'excerpt'=>Factory::create()->sentence(rand(10,18)),
             'content'=>Factory::create()->paragraphs(rand(3,7),true),
-            'image'=>'images/posts/5.jpg',
+            'image'=>'images/posts/9.jpg',
             'category_id'=>$categoryTech->id,
             'user_id'=>1,
             'published_at'=>Carbon::now()->format('Y-m-d')

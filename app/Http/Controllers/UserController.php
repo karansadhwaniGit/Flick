@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        $users=User::paginate(10);
+        return view('users.index',compact(['users']));
     }
 
     /**
@@ -23,15 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
-    }
-    public function login()
-    {
-        return view('auth.login');
-    }
-    public function resetpassword()
-    {
-        return view('auth.reset-password');
+
     }
     /**
      * Store a newly created resource in storage.
@@ -72,9 +66,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,User $user)
     {
-        //
+        if($user->roles =='author'){
+            $user->update(['roles'=>'admin']);
+            session()->flash('success',$user->name ." has been given admin roles");
+        }
+        else{
+            $user->update(['roles'=>'author']);
+            session()->flash('success',$user->name ." has been revoked admin roles");
+        }
+        return redirect(route('users.index'));
     }
 
     /**

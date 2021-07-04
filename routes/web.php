@@ -35,7 +35,7 @@ Route::get('/auth/reset-password',[UserController::class,'resetpassword'])->name
 
 require __DIR__.'/auth.php';
 //
-Route::resource('auth',UserController::class);
+Route::resource('users',UserController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('tags',TagsController::class);
 
