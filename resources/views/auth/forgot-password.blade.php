@@ -1,36 +1,34 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.auth.layout')
+@section('content')
+<div class="container mt100">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="row ">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul style="color: black;padding:2px">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+             @endforeach
+            </ul>
         </div>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+    @endif
+        <div class="col-md-3"></div>
+        <div class="col-md-6 p30 bg-dark3 text-white">
+    <form action="{{route('password.email')}}"  method="POST">
+        @csrf
+        <div class="text-center">
+            <h3 style="color:white">Forgot Password</h3>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1"  class="text-dark">Email:</label>
+          <input type="email" class="form-control" name="email" id="exampleInputPassword1" placeholder="Enter Your Email Here">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Send Link</button>
+        </div>
+        <br>
+    </form>
+</div>
+</div>
+</div>
+@endsection

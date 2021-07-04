@@ -1,56 +1,52 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.auth.layout')
+@section('content')
+<div class="container mt100">
+    <div class="row ">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 p30 bg-dark3 text-white">
+    <form action="{{route('login')}}" method="POST">
+        @csrf
+        <div class="text-center">
+            <h3 style="color:white">Sign In</h3>
+        </div>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul style="color: black;padding:2px">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                 @endforeach
+                </ul>
             </div>
+        @endif
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          @error('email')
+            <strong><small id="emailHelp" class="text-danger">{{$message}}</small></strong>
+          @enderror
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" name="password" class="text-dark">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+          @error('password')
+            <strong><small id="emailHelp" class="text-danger">{{$message}}</small></strong>
+          @enderror
+          <small id="emailHelp" class="text-muted">Forgot Your Password? <a style="color: white" href="{{route('password.request')}}">Reset Password</a></small>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <br>
+    </form>
+        <div class="text-center">
+            <form action="{{route('register')}}" method="GET">
+                @csrf
+                <label for="">Have an account? <button type="submit" style="background-color:transparent;border:none">Sign Up</button></label>
+            </form>
+        </div>
+</div>
+</div>
+</div>
+@endsection

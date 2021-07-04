@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TrashController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,13 @@ Route::delete('/posts/trash/{post}',[PostsController::class,'trash'])->name('pos
 Route::get('/posts/trashed',[PostsController::class,'trashed'])->name('posts.trashed');
 Route::put('/posts/restore/{post}',[PostsController::class,'restore'])->name('posts.restore');
 Route::delete('posts/{id}',[PostsController::class,'destroy'])->name('post.delete');
+
+Route::get('/auth/login',[UserController::class,'login'])->name('auth.login');
+Route::get('/auth/reset-password',[UserController::class,'resetpassword'])->name('auth.resetpassword');
+
 require __DIR__.'/auth.php';
 //
+Route::resource('auth',UserController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('tags',TagsController::class);
 

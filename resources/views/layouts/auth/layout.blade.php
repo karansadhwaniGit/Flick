@@ -48,11 +48,11 @@
 
 <!-- Page Loader
 ===================================== -->
-<div id="pageloader" class="bg-grad-animation-1">
+{{-- <div id="pageloader" class="bg-grad-animation-1">
     <div class="loader-item">
         <img src="{{asset('frontend/assets/img/other/oval.svg')}}" alt="page loader">
     </div>
-</div>
+</div> --}}
 
 <a href="#page-top" class="go-to-top">
     <i class="fa fa-long-arrow-up"></i>
@@ -80,11 +80,12 @@
                         <li><a class="color-light"><strong>Welcome {{auth()->user()->name}}</strong></a></li>
                         <li><a href="">Sign Out</a></li>
                     @else
-                       <li><a href="{{route('auth.login')}}"  class="dropdown-toggle color-light">Login/Signin</a></li>
+                       <li><a href="index.html" data-toggle="dropdown" class="dropdown-toggle color-light">Dashboard</a></li>
                     @endif
             </ul>
-
         </div>
     </div>
 </nav>
+@yield('content')
+
 
