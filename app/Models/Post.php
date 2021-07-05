@@ -38,4 +38,15 @@ class Post extends Model
     {
         Storage::delete($this->image);
     }
+    // Scopes
+    public function scopeSearch($query)
+    {
+        $search=request('search');
+
+        if($search)
+        {
+            return $query->where('title','like',"%$search%");
+        }
+        return $query;
+    }
 }

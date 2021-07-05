@@ -4,10 +4,10 @@
     <!-- Search
     ===================================== -->
     <div class="pr25 pl25 clearfix">
-        <form action="#">
+        <form action="{{route('blogs.index')}}" method="GET">
             <div class="blog-sidebar-form-search">
-                <input type="text" name="search" class="bg-dark3" placeholder="e.g. Javascript">
-                <button type="submit" name="submit" class="pull-right"><i class="fa fa-search"></i></button>
+                <input type="text" name="search" class="bg-dark3" placeholder="e.g. Javascript" value="{{request('search')}}">
+                <button type="submit" name="submit" value="" class="pull-right"><i class="fa fa-search"></i></button>
             </div>
         </form>
 
@@ -23,7 +23,7 @@
         </h5>
         <ul class="blog-sidebar pl25">
             @foreach ($categories as $category)
-                <li><a href="#">{{$category->name}}<span class="badge badge-pasific pull-right">{{$category->posts->count()}}</span></a>
+                <li><a href="{{route('blogs.categories',$category->id)}}">{{$category->name}}<span class="badge badge-pasific pull-right">{{$category->posts->count()}}</span></a>
             @endforeach
         </ul>
 
@@ -39,7 +39,7 @@
         </h5>
         <ul class="tag">
             @foreach($tags as $tag)
-                <li><a href="#">{{$tag->name}}</a></li>
+                <li><a href="{{route('blogs.tags',$tag->id)}}">{{$tag->name}}</a></li>
             @endforeach
         </ul>
 

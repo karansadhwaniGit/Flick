@@ -19,24 +19,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[FrontendController::class,'index']);
+Route::get('/',[FrontendController::class,'index'])->name('blogs.index');
 Route::get('/blogs/{post}',[FrontendController::class,'show'])->name('blogs.show');
+Route::get('blogs/categories/{category}',[FrontendController::class,'categories'])->name('blogs.categories');
+Route::get('blogs/tags/{tag}',[FrontendController::class,'tags'])->name('blogs.tags');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::middleware(['auth'])->group(function(){
+Route::resource('categories', CategoriesController::class);
+Route::resource('tags',TagsController::class);
 Route::delete('/posts/trash/{post}',[PostsController::class,'trash'])->name('posts.trash');
 Route::get('/posts/trashed',[PostsController::class,'trashed'])->name('posts.trashed');
 Route::put('/posts/restore/{post}',[PostsController::class,'restore'])->name('posts.restore');
 Route::delete('posts/{id}',[PostsController::class,'destroy'])->name('post.delete');
+Route::resource('posts', PostsController::class);
+});
 
-Route::get('/auth/login',[UserController::class,'login'])->name('auth.login');
-Route::get('/auth/reset-password',[UserController::class,'resetpassword'])->name('auth.resetpassword');
+
 
 require __DIR__.'/auth.php';
 //
+Route::middleware(['auth','verifyAdmin'])->group(function()
+{
 Route::resource('users',UserController::class);
-Route::resource('categories', CategoriesController::class);
-Route::resource('tags',TagsController::class);
-
-Route::resource('posts', PostsController::class);
+});

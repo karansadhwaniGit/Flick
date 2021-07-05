@@ -16,10 +16,20 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['verifyCategoriesCount'])->only('create', 'store');
+        $this->middleware(['verifyTagsCount'])->only('create', 'store');
+        $this->middleware(['verifyAuthor'])->only('edit','update','destroy','trash');
+    }
     public function index()
     {
-        $posts= Post::paginate(3);
-        return view('posts.index',compact('posts'));
+        if(auth()->user()->isAdmin()){
+            $posts=Post::paginate(10);
+        }else{
+            $posts=Post::withoutTrashed()->where('id','=',auth()->id())->paginate(10);
+        }
+        return view('posts.index',compact(['posts']));
     }
 
     /**
