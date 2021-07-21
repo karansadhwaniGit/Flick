@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-md-2 col-xs-12 mb25">
-                <div class="navbar-brand-footer center-block">Pen-It</div>
+                <div class="navbar-brand-footer center-block">Flicks</div>
                 <div class="copyright center-block">&copy; 2020. All rights reserved.</div>
             </div>
 

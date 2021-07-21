@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pen-It | Bloggers Heaven</title>
+    <title>Flicks | Bloggers Heaven</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta charset="utf-8">
@@ -69,7 +69,7 @@
             </button>
             <a class="navbar-brand page-scroll" href="#page-top">
                 <img src="{{asset('frontend/assets/img/logo/logo-default.png')}}" alt="logo">
-                Pen-It
+                Flicks
             </a>
         </div>
 

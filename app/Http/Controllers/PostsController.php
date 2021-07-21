@@ -27,7 +27,7 @@ class PostsController extends Controller
         if(auth()->user()->isAdmin()){
             $posts=Post::paginate(10);
         }else{
-            $posts=Post::withoutTrashed()->where('id','=',auth()->id())->paginate(10);
+            $posts=Post::withoutTrashed()->where('user_id','=',auth()->id())->paginate(10);
         }
         return view('posts.index',compact(['posts']));
     }
@@ -145,5 +145,22 @@ class PostsController extends Controller
         $trashed->restore();
         session()->flash("success","Post Restored Successfully!");
         return redirect(route('posts.index'));
+    }
+    public function visibility()
+    {
+        $posts=Post::oldest('published_at')->paginate(10);
+        return view('posts.visibility',compact(['posts']));
+    }
+    public function toggle_visible(Post $post)
+    {
+        if($post->visibility==1){
+            $post->visibility=0;
+            session()->flash('success','Post has been made disabled to everyone!');
+        }else{
+            $post->visibility=1;
+            session()->flash('success','Post has been made visible to everyone!');
+        }
+        $post->save();
+        return redirect(route('posts.visible'));
     }
 }

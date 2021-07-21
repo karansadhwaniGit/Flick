@@ -18,7 +18,8 @@ class validateAuthorForEditAndDeletePost
     public function handle(Request $request, Closure $next)
     {
         if(is_object($request->post)){
-            if(!($request->post->user_id == auth()->id())){
+            if(!($request->post->user_id == auth()->user()->id)){
+                // dd($request->post);
                 return redirect(abort(401));
             }
         }

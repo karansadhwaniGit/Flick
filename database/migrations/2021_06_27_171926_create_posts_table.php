@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('image');
             $table->softDeletes();
             $table->timestamp('published_at')->nullable();
+            $table->string('visibility')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

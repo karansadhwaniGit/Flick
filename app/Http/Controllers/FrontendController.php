@@ -11,7 +11,7 @@ class FrontendController extends Controller
 {
     function index()
     {
-        $posts=Post::search()->latest('published_at')->simplePaginate(3);
+        $posts=Post::search()->where('visibility','=',"1")->latest('published_at')->simplePaginate(3);
         // dd($posts);
         $tags = Tag::all();
         $categories = Category::all();

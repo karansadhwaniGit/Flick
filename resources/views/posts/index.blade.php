@@ -1,4 +1,7 @@
 @extends('layouts.admin-layout.app')
+@section('page-level-styles')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+@endsection
 @section('content')
     <div class="d-flex justify-content-end text-light">
         <a href="{{ route('posts.create')}}" class="btn btn-outline-primary m-3">Add Posts</a>
@@ -13,6 +16,12 @@
                     <th scope="col">Title</th>
                     <th scope="col">Excerpt</th>
                     <th scope="col">Action</th>
+                    @if(auth()->user()->isAdmin())
+
+                        <th scope="col">Visibility</th>
+                    @else 
+                        <th scope="col">Status</th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody class="text-center">
@@ -26,6 +35,21 @@
                             <button type="button" class="btn btn-danger" onclick="displayModal({{ $post->id}})" data-toggle="modal" data-target="#deleteModal">
                                 Delete
                             </button>
+                        </td>
+                        <td>
+                        @if(auth()->user()->isAdmin())
+                            @if($post->visibility)
+                               <a href="{{route('posts.visible')}}" class="bg-primary border border-primary text-white"><i class="fas fa-eye" ></i></a>
+                            @else
+                               <a type="submit" class="bg-primary border border-primary text-white"><i class="fas fa-eye-slash" ></i></a>
+                            @endif
+                        @else   
+                            @if($post->visibility) 
+                                <i class="fas fa-check bg-primary text-white" style="font-size:30px;padding:3px;border-radius:4px"></i>
+                            @else
+                                <i class="fas fa-clock bg-warning text-white" style="font-size:30px;padding:3px;border-radius:4px"></i>
+                            @endif  
+                        @endif
                         </td>
                     </tr>
                 @endforeach
@@ -70,4 +94,5 @@
             $("#deleteCategoryForm").attr('action',url);
         }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 @endsection

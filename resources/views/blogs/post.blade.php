@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12 pt50">
                     <h1 class="brand-heading font-montserrat text-uppercase color-light" data-in-effect="fadeInDown">
-                        Pen-It
+                        Flicks
                         <small class="color-light alpha7">{{$post->title}}</small>
                     </h1>
                 </div>
@@ -43,7 +43,7 @@
             <div class="blog-post-read-tag mt50">
                 <i class="fa fa-tags"></i> Tags:
                 @foreach ($post->tags as $tag)
-                    <a href="">{{$tag->name}}</a>
+                    <a href="">{{$tag->name}}</a>{{$loop->last ?'.':','}}
                 @endforeach
             </div>
 

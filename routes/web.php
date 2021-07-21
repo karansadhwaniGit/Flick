@@ -29,6 +29,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::middleware(['auth','verifyAdmin'])->group(function()
+{
+Route::resource('users',UserController::class);
+Route::get('/posts/visible',[PostsController::class,'visibility'])->name('posts.visible');
+Route::put('/posts/visible/{post}',[PostsController::class,'toggle_visible'])->name('posts.toggle');
+});
+
 Route::middleware(['auth'])->group(function(){
 Route::resource('categories', CategoriesController::class);
 Route::resource('tags',TagsController::class);
@@ -43,7 +50,3 @@ Route::resource('posts', PostsController::class);
 
 require __DIR__.'/auth.php';
 //
-Route::middleware(['auth','verifyAdmin'])->group(function()
-{
-Route::resource('users',UserController::class);
-});
